@@ -1,10 +1,136 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>AgoraAI MVP</title>
-  </head>
-  <body>
-    <h1>안녕하세요 👋</h1>
-    <p>이것은 AgoraAI MVP 첫 화면입니다.</p>
-  </body>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>AgoraAI MVP</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      width: 360px;
+      height: 600px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      padding: 16px;
+      text-align: center;
+      font-weight: bold;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .messages {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+    }
+
+    .message {
+      margin-bottom: 12px;
+      max-width: 80%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .ai {
+      background: #eee;
+      align-self: flex-start;
+    }
+
+    .user {
+      background: #4f46e5;
+      color: white;
+      align-self: flex-end;
+    }
+
+    .input-area {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+
+    input {
+      flex: 1;
+      border: none;
+      padding: 14px;
+      font-size: 14px;
+    }
+
+    button {
+      border: none;
+      padding: 0 16px;
+      background: #4f46e5;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    input:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="chat-container">
+    <div class="header">AgoraAI</div>
+
+    <div class="messages" id="messages">
+      <div class="message ai">
+        안녕하세요 👋<br />
+        몇 가지 질문을 통해<br />
+        당신과 비슷한 사람을 찾아볼게요 🙂
+      </div>
+    </div>
+
+    <div class="input-area">
+      <input id="userInput" type="text" placeholder="답변을 입력하세요..." />
+      <button onclick="sendMessage()">▶</button>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const messages = document.getElementById("messages");
+      const text = input.value.trim();
+
+      if (text === "") return;
+
+      // 사용자 메시지
+      const userMessage = document.createElement("div");
+      userMessage.className = "message user";
+      userMessage.innerText = text;
+      messages.appendChild(userMessage);
+
+      input.value = "";
+      messages.scrollTop = messages.scrollHeight;
+
+      // AI 응답 (가짜)
+      setTimeout(() => {
+        const aiMessage = document.createElement("div");
+        aiMessage.className = "message ai";
+        aiMessage.innerText =
+          "흥미로운 답변이네요 🤔\n당신과 비슷한 사람을 분석 중이에요...";
+        messages.appendChild(aiMessage);
+        messages.scrollTop = messages.scrollHeight;
+      }, 800);
+    }
+  </script>
+
+</body>
 </html>
+
